@@ -5,7 +5,7 @@ import { Button, ButtonGroup, Card, Image, Text,
 import { Link } from 'react-router-dom';
 import {useColorMode} from '@chakra-ui/color-mode'
 
-const ProductCard = ({attributes}) => {
+const ProductCard = ({id,attributes}) => {
     const { colorMode } = useColorMode();
    
 
@@ -23,13 +23,14 @@ const ProductCard = ({attributes}) => {
       mx={'auto'}
     /> 
     <Stack mt='6' spacing='3'>
-      <Heading size='md'>{attributes.title}</Heading>
+   
+       <Heading size='md'>{attributes.title}</Heading>
       <Text>
       {attributes.des}
       </Text>
       <Text color='blue.600' fontSize='2xl'>
         $ {attributes.price}
-      </Text>
+      </Text> 
     </Stack>
   </CardBody>
   <Divider />
@@ -37,7 +38,7 @@ const ProductCard = ({attributes}) => {
     <ButtonGroup width={'full'} spacing='2'>
       <Button 
       as={Link}
-      to={'/products/1'}
+      to={`/products/${id}`}
       py={7}
       bg={colorMode != 'light' ? '#f8f8f8' : '#b54cff'}
       color={colorMode === 'light' ? '#f8f8f8' : '#b54cff'}
