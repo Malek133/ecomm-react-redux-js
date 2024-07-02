@@ -1,7 +1,7 @@
 
 import { Box,Flex ,Button, ButtonGroup, 
   Card, Image, Text,CardBody, CardFooter,
-   Divider, Heading, Stack } from "@chakra-ui/react";
+   Divider, Heading, Stack} from "@chakra-ui/react";
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import ProductDetailSkelaton from "../components/ProductDetailSkelaton";
@@ -43,8 +43,17 @@ import { ArrowRight } from "lucide-react";
   return (
     <>
       <Flex ml={50} my={50}>
-        <ArrowRight />
-        <Text  onClick={GoBack}>Back</Text>
+        
+        <Button onClick={GoBack}
+        variant='solid'
+         colorScheme='blue'
+         _hover={{
+        bg: colorMode === 'light' ? 'black' : 'white',
+        color: colorMode === 'light' ? 'blue.50' : 'black'
+        }}>
+        <ArrowRight /> Back
+        </Button>
+        
       </Flex>
       <Box mx='auto' my={30}  width={'500px'}>
         <Card border={"1px solid black"}>
