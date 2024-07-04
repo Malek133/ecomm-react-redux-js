@@ -8,16 +8,18 @@ import Team from './pages/Team'
 import Login from './pages/Login'
 import Lyaout from './lyaout/lyaout'
 import CookiesService from './srvices/CookiesService'
+import CartDrawer from './components/CartDrawer'
+
 
 const App = () => {
 
   const token = CookiesService.get('jwt')
   return (
     <>
-    
+      <CartDrawer />
        <Routes>
-
-       <Route  path="/" element={<Lyaout isAuthenticated={token} />}> 
+       
+       <Route  path="/" element={<Lyaout />}> 
           <Route index element={<Home />} />
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/products" element={<ProductPage />} />

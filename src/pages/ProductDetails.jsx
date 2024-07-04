@@ -9,15 +9,18 @@ import { useNavigate,useParams } from "react-router-dom";
 import { useColorMode } from "@chakra-ui/color-mode";
 import { useEffect } from "react";
 import { ArrowRight } from "lucide-react";
+import { useDispatch } from "react-redux";
+import {addToCart} from '../app/feauture/CartSlice'
 
  const ProductDetails = ({attributes}) => {
   const { id } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { colorMode } = useColorMode();
 
   const getProductList = async () => {
     const { data } = await axios.get(
-      `${import.meta.env.VITE_SERVER_URL}/api/products/${id}?populate=categories,thumbnail`
+      `${import.meta.env.VITE_SERVER_URL}/api/products/${id}?populate=thumbnail&fields=price&fields=title`
     );
     return data;
   };
@@ -27,11 +30,22 @@ import { ArrowRight } from "lucide-react";
     queryFn: getProductList,
   });
 
+  useEffect(() => {
+    if (data?.data?.attributes?.title) {
+      document.title = `Product ${data.data.attributes.title} Page`;
+    }
+  }, [data]);
+
   const GoBack = () => navigate(-1);
 
-  useEffect(() => {
-    document.title = `Product ${data?.data?.attributes?.title} Page`;
-  }, [data]);
+  const AddToCarteHandler = () =>{
+     dispatch(addToCart(data.data))
+    // console.log()
+  }
+
+  // useEffect(() => {
+  //   document.title = `Product ${data?.data?.attributes?.title} Page`;
+  // }, [data]);
 
   if (isLoading)
     return (
@@ -80,7 +94,7 @@ import { ArrowRight } from "lucide-react";
           <CardFooter>
             <ButtonGroup width={"full"} spacing="2">
               <Button
-                
+                onClick={AddToCarteHandler}
                 py={7}
                 bg={colorMode != "light" ? "#f8f8f8" : "#b54cff"}
                 color={colorMode === "light" ? "#f8f8f8" : "#b54cff"}
@@ -91,9 +105,9 @@ import { ArrowRight } from "lucide-react";
                 width={"full"}
                 variant="solid"
                 colorScheme="blue"
-                size="md"
+                size="lg"
               >
-                Buy Now
+                Add To Carte
               </Button>
             </ButtonGroup>
           </CardFooter>

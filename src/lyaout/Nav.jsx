@@ -3,13 +3,16 @@
 import {
   Box,Flex, Avatar,HStack,Button,
   Menu, MenuButton, MenuList,MenuItem, 
-  MenuDivider,useDisclosure,useColorModeValue,
+  MenuDivider,useColorModeValue,
   Stack,useColorMode,Center,
 } from '@chakra-ui/react'
-
+import { useSelector,useDispatch } from "react-redux";
+import {selectCart} from '../app/feauture/CartSlice'
 import { Moon,SunMoon } from 'lucide-react';
 import CookiesService from '../srvices/CookiesService'
 import { Link, Link as RouterLink } from 'react-router-dom';
+import {onOpenCartDrawerAction} from '../app/feauture/GlobalSlice'
+
 
 
 const Links = ['Dashboard', 'Products', 'Team','About']
@@ -34,8 +37,12 @@ const NavLink = ({ children }) => {
 }
 
 export default function Nav() {
+  
+  const { CartProducts } = useSelector(selectCart);
+  const onOpen = () => dispatch(onOpenCartDrawerAction()) 
+  const dispatch = useDispatch()
   const { colorMode, toggleColorMode } = useColorMode()
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  // const { isOpen, onOpen, onClose } = useDisclosure()
   const token = CookiesService.get('jwt')
   const LogoutHandler = () =>{
     CookiesService.remove('jwt')
@@ -60,7 +67,7 @@ export default function Nav() {
             <Button onClick={toggleColorMode}>
                 {colorMode === 'light' ? <Moon /> : <SunMoon />}
               </Button>
-
+             <Button onClick={onOpen}> Cart ({CartProducts.length})</Button>
               {
                 token ? (
                   
@@ -117,6 +124,7 @@ export default function Nav() {
           
         </Flex>
       </Box>
+
     </>
   )
 }

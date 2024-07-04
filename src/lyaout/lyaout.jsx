@@ -1,13 +1,13 @@
 
- import { Outlet,Navigate } from 'react-router-dom';
+ import { Outlet } from 'react-router-dom';
 import Nav from './Nav'
 
 
 
 
-const Lyaout = ({isAuthenticated}) => {
+const Lyaout = () => {
   
-  if(isAuthenticated) return <Navigate to={'/'} replace />;
+
   return (
     <>
     <Nav />
