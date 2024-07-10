@@ -1,16 +1,17 @@
 import {useRef} from 'react'
 import {Drawer,DrawerHeader,DrawerCloseButton
-,DrawerOverlay,DrawerContent, Input,
-DrawerBody,DrawerFooter,Button} from '@chakra-ui/react'
+,DrawerOverlay,DrawerContent,DrawerFooter
+,Button,DrawerBody} from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import {selectGlobal,onCloseCartDrawerAction
 } from '../app/feauture/GlobalSlice'
+import {selectCart}from '../app/feauture/CartSlice'
+import CarteDrawerItem from './CarteDrawerItem'
 
 const CartDrawer = () => {
     const btnRef = useRef()
-   const {isOpenCartDrawer, 
-    onOpenCartDrawer, 
-    onCloseCartDrawer} = useSelector(selectGlobal);
+   const {isOpenCartDrawer} = useSelector(selectGlobal);
+   const {CartProducts} = useSelector(selectCart);
 
     const dispatch = useDispatch()
     const onClose = () => dispatch(onCloseCartDrawerAction()) 
@@ -30,9 +31,15 @@ const CartDrawer = () => {
       <DrawerCloseButton />
       <DrawerHeader>All Products In Carte</DrawerHeader>
 
-      <DrawerBody>
-        <Input placeholder='Type here...' />
-      </DrawerBody>
+       <DrawerBody>
+        {
+          CartProducts.map(i =>(
+          <CarteDrawerItem key={i.id} {...i} />  
+          ))
+        }
+        
+        {/* <Input placeholder='Type here...' /> */}
+      </DrawerBody> 
 
       <DrawerFooter>
         <Button variant='outline' mr={3} onClick={onClose}>
