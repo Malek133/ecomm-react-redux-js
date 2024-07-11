@@ -1,16 +1,13 @@
 
  import { Outlet } from 'react-router-dom';
-import Nav from './Nav'
-
-
-
+ import Nav from './Nav'
 
 const Lyaout = () => {
   
 
   return (
     <>
-    <Nav />
+     <Nav /> 
    <Outlet />
     </>
   )
