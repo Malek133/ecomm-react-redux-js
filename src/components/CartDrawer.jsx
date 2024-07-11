@@ -1,11 +1,11 @@
 import {useRef} from 'react'
 import {Drawer,DrawerHeader,DrawerCloseButton
 ,DrawerOverlay,DrawerContent,DrawerFooter
-,Button,DrawerBody} from '@chakra-ui/react'
+,Button,DrawerBody,Text} from '@chakra-ui/react'
 import { useDispatch, useSelector } from 'react-redux'
 import {selectGlobal,onCloseCartDrawerAction
 } from '../app/feauture/GlobalSlice'
-import {selectCart}from '../app/feauture/CartSlice'
+import {selectCart,clearFromCart}from '../app/feauture/CartSlice'
 import CarteDrawerItem from './CarteDrawerItem'
 
 const CartDrawer = () => {
@@ -20,7 +20,7 @@ const CartDrawer = () => {
 
 
   return (
-    <Drawer
+    <Drawer 
     isOpen={isOpenCartDrawer}
     placement='right'
     onClose={onClose}
@@ -33,19 +33,21 @@ const CartDrawer = () => {
 
        <DrawerBody>
         {
+         CartProducts.length ? (
           CartProducts.map(i =>(
-          <CarteDrawerItem key={i.id} {...i} />  
-          ))
+          <CarteDrawerItem key={i.id} {...i} /> )) 
+          ) : (
+          <Text fontSize={'larger'}>No Product</Text>)
         }
         
-        {/* <Input placeholder='Type here...' /> */}
       </DrawerBody> 
 
       <DrawerFooter>
         <Button variant='outline' mr={3} onClick={onClose}>
           Cancel
         </Button>
-        <Button colorScheme='blue'>Save</Button>
+        <Button onClick={()=>{dispatch(clearFromCart())}}
+        colorScheme='blue'>Clear All</Button>
       </DrawerFooter>
     </DrawerContent>
   </Drawer>
