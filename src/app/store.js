@@ -4,6 +4,7 @@ import cartSlice from './feauture/CartSlice'
 import globalSlice from './feauture/GlobalSlice'
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import {apiSlice} from '../app/services/ApiSlice'
 
 const persistCartConfig = {
     key: 'cart',
@@ -15,8 +16,13 @@ export const store = configureStore({
     reducer:{
         cart:persistedCart,
         login:loginSlice,
-        global:globalSlice
-    }
+        global:globalSlice,
+        [apiSlice.reducerPath]:apiSlice.reducer,
+    },
+    middleware: getDefaultMiddleware =>
+    getDefaultMiddleware({
+        serializableCheck:false,
+    }).concat([apiSlice.middleware])
 })
 
 export const persistor = persistStore(store)

@@ -3,7 +3,7 @@ import { Skeleton,Stack } from '@chakra-ui/react'
 const DashboardProductTableSkelaton = () => {
   return (
     <>
-    <Stack>
+    <Stack maxW={'87%'} mx='auto'>
 
          <Skeleton height='40px' />
       <Skeleton height='40px' />

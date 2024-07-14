@@ -50,9 +50,7 @@ const ProductCard = ({id,attributes}) => {
       colorScheme='blue'size='md' >
         View Details
       </Button>
-      {/* <Button variant='ghost' colorScheme='blue'>
-        Add to cart
-      </Button> */}
+      
     </ButtonGroup>
   </CardFooter>
 </Card>
