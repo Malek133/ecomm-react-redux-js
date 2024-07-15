@@ -6,8 +6,8 @@ import {
           
   } from '@chakra-ui/react'
 
-const CustomModal = ({isOpen,onClose,onClick,
-    title,save,cancel,children,isLoading}) => {
+const CreateModal = ({isOpen,onClose,onClick,
+    title,add,cancel,children,isLoading}) => {
   return (
     <>
      <Modal
@@ -31,7 +31,7 @@ const CustomModal = ({isOpen,onClose,onClick,
           <ModalFooter>
             <Button colorScheme='green' mr={3}
              onClick={onClick} isLoading={isLoading} >
-              {save}
+              {add}
             </Button>
             <Button onClick={onClose}>{cancel}</Button>
           </ModalFooter>
@@ -41,4 +41,4 @@ const CustomModal = ({isOpen,onClose,onClick,
   )
 }
 
-export default CustomModal
+export default CreateModal

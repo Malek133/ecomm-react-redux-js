@@ -23,7 +23,7 @@ const App = () => {
       <CartDrawer />
        <Routes>
        
-       <Route  path="/" element={<Lyaout />}> 
+       <Route  path="/" element={<Lyaout isAuthenticated={token} />}> 
           <Route index element={<Home />} />
           <Route path="/products/:id" element={<ProductDetails />} />
           <Route path="/products" element={<ProductPage />} />
